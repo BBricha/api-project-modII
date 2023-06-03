@@ -1,0 +1,141 @@
+/* .chat_container{ 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  color: rgb(230, 205, 205);
+}
+
+  
+input[type='text'] {
+  height: 40px;
+  transition: height 0.2s;
+  width: 550px;
+  background-color: transparent;
+  color: red;
+  border-radius: 22px;
+  margin-top: 20px;
+  border-color: blue;
+    
+}
+  
+input[type='text']:focus {
+  height: 50px; 
+  border-radius: 22px;
+  border-color: rgb(30, 202, 68);
+    
+}
+  
+/* .input-container {
+  margin-bottom: 20px;
+}
+  
+.custom-textarea:before {
+    width: 60%;
+    height: 150px;
+    resize: vertical;
+    border: 1px solid #ccc;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-y: auto;
+}
+  
+input[type='submit'] {
+    padding: 8px 16px;
+    background-color: #fca311;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+} */
+
+
+/* .expandable-text{
+  border: 1px solid #ccc;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 1px 6px;
+  margin-top: 20;
+  display: block;
+  width: 60%;
+  overflow: hidden;
+  resize: both;
+  min-height: 40px;
+  line-height: 20px;
+  max-width: 500px;
+  min-width: 500px;
+} */ 
+
+.custom-textarea {
+  max-height: 200px !important;
+  overflow: auto;
+  resize: none;
+  width: 300%;
+  border-radius: 10px;
+  background: black;
+  outline: 3px solid blue;
+  color: peachpuff;
+  padding: 10px;
+}
+
+/* .text-area::-webkit-scrollbar {
+  display: none;
+} */
+
+
+/* width */
+.custom-textarea::-webkit-scrollbar {
+  width: 07px;
+}
+
+/* Track */
+.custom-textarea::-webkit-scrollbar-track {
+  box-shadow: transparent; 
+  border-radius: 20px;
+  margin-right: 10px;
+}
+ 
+/* Handle */
+.custom-textarea::-webkit-scrollbar-thumb {
+  background: #b7ecad; 
+  border-radius: 10px;
+  
+}
+
+/* Handle on hover */
+.custom-textarea::-webkit-scrollbar-thumb:hover {
+  background: #3ff81a; 
+  
+}
+
+textarea[type='text']:focus {
+  height: 30px; 
+  border-radius: 12px;
+  border-color: rgb(0, 0, 0);
+    
+}
+.chat_container {
+  color: yellow;
+}
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ position: fixed;
+ bottom: 10px;
+ right: 39%;
+ width: 16%
+}
+.response_input_container{
+  position: fixed;
+  right: 21%;
+  border: 2px solid blueviolet;
+  bottom: 121px;
+  width: 51%;
+  overflow-y: auto;
+  background-color: transparent;
+  padding: 10px;
+  max-height: 754px;
+  height: 754px;
+  border-radius: 10px;
+}
