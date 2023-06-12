@@ -10,10 +10,10 @@ import PhotoGenerate from './components/photo_generate';
 function App() {
   return (
     <div className="App">
-      {/* <NavBar /> */}
+      <NavBar />
       {/* <Form /> */}
       <Chatbot />
-      {/* <PhotoGenerate /> */}
+      <PhotoGenerate />
       {/* <ContentGenerate /> */}
       {/* <CodeDebugg /> */}
 

@@ -2,24 +2,25 @@ import React, { useEffect, useState } from 'react'
 import { Configuration, OpenAIApi } from "openai";
 import "./index.css"
 // import TextField from '@mui/material/TextField';
+require('dotenv').config();
 
 const Chatbot =  () => {
 
     const [chat, setChat] = useState([]);
     const [input, setInput] = useState({
-        user_input: "Hello! How may I assist you"
+        user_input: ""
     });
     const [logInput, setLogInput] = useState([])
-
-    const fetchData = async (userInput) => {      
+    const apiKey = process.env.API_KEY;
+    const fetchData = async (userInput, apiKey) => {      
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
-            apiKey: '',
+            apiKey: apiKey,
         });
         const openai = new OpenAIApi(configuration);
         const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            max_tokens: 3,
+            max_tokens: 5,
             messages: [{role: "user", content: `${userInput}`}],
                     
         });
@@ -32,8 +33,8 @@ const Chatbot =  () => {
         setLogInput(newLogInput);
     }
   
-    console.log(chat)
-    console.log(input)
+    // console.log(chat)
+    // console.log(input)
 
     // useEffect( () => {
     //     fetchData()
@@ -50,10 +51,10 @@ const Chatbot =  () => {
         event.preventDefault();
         
         fetchData(input.user_input)
-        setInput({ user_input: "" });
+        event.target.value = "" 
        
     }
-    console.log(input);
+    
     return (
         <div className='chat_container'>
             <div className='response_input_container'>

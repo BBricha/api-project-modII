@@ -1,15 +1,18 @@
 import React, { useState } from 'react'
 import { Configuration, OpenAIApi } from "openai";
-
+require('dotenv').config();
 const PhotoGenerate = () => {
     const [img, setImg] = useState([]);
     const [input, setInput] = useState({
         user_input: ""
     });
-    const fetchData = async (userInput) => {      
+
+    const apiKey = process.env.API_KEY;
+    
+    const fetchData = async (userInput, apiKei) => {      
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
-            apiKey: 'M8CtfAGRS',
+            apiKey: apiKey,
         });
         const openai = new OpenAIApi(configuration);
         const response = await openai.createImage({

@@ -1,0 +1,10 @@
+.nav_bar_container {
+    color: aqua;
+    position: fixed;
+    left: 3%;
+    top: 5%;
+    background-color: dimgrey;
+    width: 21%;
+    height: 80%;
+
+}

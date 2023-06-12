@@ -107,6 +107,29 @@ input[type='submit'] {
   background: #3ff81a; 
   
 }
+.response_input_container::-webkit-scrollbar {
+  width: 07px;
+}
+
+/* Track */
+.response_input_container::-webkit-scrollbar-track {
+  box-shadow: transparent; 
+  border-radius: 20px;
+  margin-right: 10px;
+}
+ 
+/* Handle */
+.response_input_container::-webkit-scrollbar-thumb {
+  background: #b7ecad; 
+  border-radius: 10px;
+  
+}
+
+/* Handle on hover */
+.response_input_container::-webkit-scrollbar-thumb:hover {
+  background: #3ff81a; 
+  
+}
 
 textarea[type='text']:focus {
   height: 30px; 
@@ -128,14 +151,14 @@ textarea[type='text']:focus {
 }
 .response_input_container{
   position: fixed;
-  right: 21%;
+  right: 20.5%;
   border: 2px solid blueviolet;
-  bottom: 121px;
-  width: 51%;
+  bottom: 100px;
+  width: 48%;
   overflow-y: auto;
-  background-color: transparent;
+  background-color: rgb(81, 88, 88);
   padding: 10px;
-  max-height: 754px;
-  height: 754px;
+  max-height: 80%;
+  height: 75%;
   border-radius: 10px;
 }
