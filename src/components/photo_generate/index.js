@@ -1,24 +1,25 @@
 import React, { useState } from 'react'
 import { Configuration, OpenAIApi } from "openai";
-require('dotenv').config();
+// require('dotenv').config();
+ 
 const PhotoGenerate = () => {
     const [img, setImg] = useState([]);
     const [input, setInput] = useState({
         user_input: ""
     });
 
-    const apiKey = process.env.API_KEY;
-    
-    const fetchData = async (userInput, apiKei) => {      
+   
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const fetchData = async (userInput, apiKey) => {      
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
-            apiKey: apiKey,
+            apiKey: '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',
         });
         const openai = new OpenAIApi(configuration);
         const response = await openai.createImage({
             prompt: `${userInput}`,
             n: 1,
-            size: "1024x1024",
+            size: "256x256",
           });
         const newimg = [...img];
         newimg.push(response.data.data[0].url)
@@ -52,11 +53,18 @@ const PhotoGenerate = () => {
     return (
         <div>
             
+               
+            <div className='response_input_container'>
+               <img src='https://bulma.io/images/placeholders/256x256.png' />
+               <img src='https://bulma.io/images/placeholders/256x256.png' />
+               
+               
+               
                 {img.map((message) => {
-                    return <img src={message}/>
+                                    return <img src={message}/>
 
-                })}
-            
+                                })}
+            </div>
             <form onSubmit={handleSubmit}>
             What do you want the image to look like?
                 <input

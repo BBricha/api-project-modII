@@ -5,10 +5,10 @@ const NavBar = () => {
    
   return (
     <div className='nav_bar_container'>
-      <h5>NavBar1</h5>
-      <h5>NavBar2</h5>
-      <h5>NavBar3</h5>
-      <h5>NavBar4</h5>
+      <h5>Chatbot</h5>
+      <h5>Photo Genrator</h5>
+      <h5>Code Debugg</h5>
+      <h5>Content Creator</h5>
     </div>
   )
 }

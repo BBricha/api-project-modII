@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Configuration, OpenAIApi } from "openai";
 import "./index.css"
+import LoadingDots from '../form/Form';
 // import TextField from '@mui/material/TextField';
-require('dotenv').config();
+// require('dotenv').config();
 
 const Chatbot =  () => {
 
@@ -11,11 +12,12 @@ const Chatbot =  () => {
         user_input: ""
     });
     const [logInput, setLogInput] = useState([])
-    const apiKey = process.env.API_KEY;
+
+    // const apiKey = process.env.REACT_APP_API_KEY;
     const fetchData = async (userInput, apiKey) => {      
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
-            apiKey: apiKey,
+            apiKey: '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',
         });
         const openai = new OpenAIApi(configuration);
         const response = await openai.createChatCompletion({
@@ -52,25 +54,38 @@ const Chatbot =  () => {
         
         fetchData(input.user_input)
         event.target.value = "" 
-       
     }
     
+    
+    
+    // console.log(interval);
+    let chatJSX = chat.map((message, index) => {
+        return (<div>
+            <div className='user_img_text'>
+                <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
+                <p> {logInput[index]}</p>
+            </div>
+            <div className='assistance_img_text'>
+                <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
+                <p>{message}</p>
+            </div>
+        </div>)
+    })
+    // const dots = ()=> {if (chat.length < logInput.length){
+    //     return <LoadingDots />
+    // }};
+    let textChat = <h4><h2>CHATGPT</h2>in particular, is fine-tuned to excel in generating responses to conversational prompts. It can be used for various applications such as chatbots, virtual assistants, customer support systems, and more. The model is capable of understanding context, generating coherent and contextually relevant responses, and engaging in back-and-forth conversations. 
+        <br /> So let's ask it to do tasks for us. </h4>
     return (
         <div className='chat_container'>
             <div className='response_input_container'>
             
-                {chat.map((message, index) => {
-                    return (<div>
-                        <p>User: <br/> {logInput[index]}</p>
-                        <p>Assitant: <br/>{message}</p>
-
-                    </div>)
-                })}
+                {chat.length > 0 ? chatJSX:textChat }
             </div>
             <div >
-                
+            
                 <form onSubmit={handleSubmit} className="input-container">
-                  
+                
                     <textarea 
                         className='custom-textarea'
                         type="text"

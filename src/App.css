@@ -2,3 +2,21 @@ body {
   text-align: center;
   background-color: rgb(81, 88, 88);
 }
+.header {
+  width: 100%;
+  display: flex;
+  position: fixed;
+  top: -11px;
+  left: 2%;
+  flex-direction: row;
+  margin-left: 0px;
+  justify-content: space-between;
+  color: #d5d767;
+}
+.header img {
+  width: 47px;
+  height: 46px;
+  border-radius: 6px;
+  margin-right: 3vw;
+  margin-top: 15px;
+}
