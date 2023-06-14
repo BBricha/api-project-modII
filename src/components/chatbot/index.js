@@ -8,21 +8,26 @@ import LoadingDots from '../form/Form';
 const Chatbot =  () => {
 
     const [chat, setChat] = useState([]);
+
     const [input, setInput] = useState({
         user_input: ""
     });
+    // const [displayChat, setDisplayChat] = useState('')
     const [logInput, setLogInput] = useState([])
 
-    // const apiKey = process.env.REACT_APP_API_KEY;
-    const fetchData = async (userInput, apiKey) => {      
+    const [displayText, setDisplayText] = useState('');
+
+    const apiKey = process.env.REACT_APP_API_KEY;
+    console.log(apiKey);
+    const fetchData = async (userInput, apiK) => {      
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
-            apiKey: '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',
+            apiKey: apiK,
         });
         const openai = new OpenAIApi(configuration);
         const response = await openai.createChatCompletion({
             model: "gpt-3.5-turbo",
-            max_tokens: 5,
+            max_tokens: 50,
             messages: [{role: "user", content: `${userInput}`}],
                     
         });
@@ -52,12 +57,28 @@ const Chatbot =  () => {
 
         event.preventDefault();
         
-        fetchData(input.user_input)
+        fetchData(input.user_input, apiKey)
         event.target.value = "" 
     }
     
     
+    let delay = 50;
+        
+    useEffect(() => {
+        const lastMessage = chat[chat.length - 1];
+        if (lastMessage) {
+            let timer = setTimeout(() => {
+                const nextCharIndex = displayText.length + 1;
+                setDisplayText(lastMessage.substring(0, nextCharIndex));
+            }, delay);
     
+            return () => {
+                clearTimeout(timer);
+            };
+        }
+    }, [displayText, chat]);
+    
+
     // console.log(interval);
     let chatJSX = chat.map((message, index) => {
         return (<div>
@@ -67,15 +88,41 @@ const Chatbot =  () => {
             </div>
             <div className='assistance_img_text'>
                 <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
-                <p>{message}</p>
+                <p>{displayText}</p>
             </div>
         </div>)
     })
+
     // const dots = ()=> {if (chat.length < logInput.length){
     //     return <LoadingDots />
     // }};
+
+    
+    // const text = `in particular, is fine-tuned to excel in generating responses to conversational prompts. It can be used for various applications such as chatbots, virtual assistants, customer support systems, and more. The model is capable of understanding context, generating coherent and contextually relevant responses, and engaging in back-and-forth conversations. So let's ask it to do tasks for us.`
+    
+    // useEffect(() => {
+    //     let timer;
+    //       const nextCharIndex = displayText.length + 1;
+      
+    //       timer = setTimeout(() => {
+    //         setDisplayText(prevDisplayText => text.substring(0, nextCharIndex));
+    //       }, delay);
+        
+      
+    //     return () => {
+    //       clearTimeout(timer);
+    //     };
+    //   }, [displayText]);
+    
+    
+    // let textChat = <h4><h2>CHATGPT</h2>{displayText}</h4>
+
+
+
     let textChat = <h4><h2>CHATGPT</h2>in particular, is fine-tuned to excel in generating responses to conversational prompts. It can be used for various applications such as chatbots, virtual assistants, customer support systems, and more. The model is capable of understanding context, generating coherent and contextually relevant responses, and engaging in back-and-forth conversations. 
         <br /> So let's ask it to do tasks for us. </h4>
+
+
     return (
         <div className='chat_container'>
             <div className='response_input_container'>
@@ -95,7 +142,7 @@ const Chatbot =  () => {
                         onChange={handleChange}
                         onKeyDown={(event) => {
                             if (event.key === 'Enter') {
-                                fetchData(input.user_input);
+                                fetchData(input.user_input, apiKey);
                                 event.preventDefault()
                             }
                             else {event.target.style.height = '';

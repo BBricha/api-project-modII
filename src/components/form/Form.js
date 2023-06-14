@@ -61,3 +61,48 @@
 // };
 
 // export default ChatComponent;
+// import React, { useState, useEffect } from 'react';
+
+// const SlowText = () => {
+//   const [displayText, setDisplayText] = useState('');
+ 
+//  let delay = 100
+//   useEffect(() => {
+//     let timer = setTimeout(() => {
+//       const nextCharIndex = displayText.length + 1;
+//       setDisplayText(chat.substring(0, nextCharIndex));
+//     }, delay);
+
+//     return () => {
+//       clearTimeout(timer);
+//     };
+//   }, [displayText, chat, delay]);
+
+//   return <p>{displayText}</p>;
+// };
+
+// export default SlowText;
+
+
+// useEffect(() => {
+//     let timer;
+//     const lastMessage = chat[chat.length - 1];
+  
+//     if (lastMessage) {
+//       const nextCharIndex = displayText.length + 1;
+  
+//       timer = setTimeout(() => {
+//         setDisplayText(prevDisplayText => lastMessage.substring(0, nextCharIndex));
+//       }, delay);
+//     }
+  
+//     return () => {
+//       clearTimeout(timer);
+//     };
+//   }, [chat]);
+
+  
+  
+  
+  
+  
