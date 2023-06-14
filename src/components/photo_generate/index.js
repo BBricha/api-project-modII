@@ -17,8 +17,9 @@ const PhotoGenerate = () => {
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
             apiKey: apik,
         });
+        delete configuration.baseOptions.headers['User-Agent'];
         const openai = new OpenAIApi(configuration);
-        const response = await openai.createImage({
+        try {const response = await openai.createImage({
             prompt: `${userInput}`,
             n: 1,
             size: "256x256",
@@ -27,6 +28,9 @@ const PhotoGenerate = () => {
         newimg.push(response.data.data[0].url)
         console.log(response.data.data[0].url)
         setImg(newimg);
+        }  catch(err) {
+            console.error(err)
+          }
     }
   
     // console.log(img)
@@ -46,7 +50,7 @@ const PhotoGenerate = () => {
 
         event.preventDefault();
         
-        fetchData(input.user_input, apik)
+        fetchData(input.user_input, apiKey)
         
         setInput({ user_input: "" });
     };
