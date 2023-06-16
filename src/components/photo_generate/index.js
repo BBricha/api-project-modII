@@ -12,14 +12,16 @@ const PhotoGenerate = () => {
 
 
     const apiKey = process.env.REACT_APP_API_KEY;
-    const fetchData = async (userInput, apik) => {      
+    const fetchData = async (userInput, apik) => {
+        console.log(process.env);
+        console.log(apik)      
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
             apiKey: apik,
         });
         delete configuration.baseOptions.headers['User-Agent'];
         const openai = new OpenAIApi(configuration);
-        try {const response = await openai.createImage({
+   const response = await openai.createImage({
             prompt: `${userInput}`,
             n: 1,
             size: "256x256",
@@ -28,9 +30,7 @@ const PhotoGenerate = () => {
         newimg.push(response.data.data[0].url)
         console.log(response.data.data[0].url)
         setImg(newimg);
-        }  catch(err) {
-            console.error(err)
-          }
+
     }
   
     // console.log(img)

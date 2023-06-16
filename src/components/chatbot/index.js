@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Configuration, OpenAIApi } from "openai";
 import "./index.css"
 import LoadingDots from '../form/Form';
+
 // import TextField from '@mui/material/TextField';
 // require('dotenv').config();
-
+ 
 const Chatbot =  () => {
 
     const [chat, setChat] = useState([]);
-
+    
     const [input, setInput] = useState({
         user_input: ""
     });
@@ -19,18 +20,23 @@ const Chatbot =  () => {
 
     const apiKey = process.env.REACT_APP_API_KEY;
     console.log(apiKey);
-    const fetchData = async (userInput, apiK) => {      
+    const fetchData = async (userInput, apiK) => {    
+        console.log(apiK)
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
             apiKey: apiK,
         });
+        console.log("making query");
+        delete configuration.baseOptions.headers['User-Agent'];
         const openai = new OpenAIApi(configuration);
-        const response = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            max_tokens: 50,
-            messages: [{role: "user", content: `${userInput}`}],
-                    
-        });
+        try { let response = await openai.createChatCompletion({
+                model: "gpt-3.5-turbo",
+                max_tokens: 50,
+                messages: [{role: "user", content: `${userInput}`}],
+                        
+            });
+    
+            
         const newChat = [...chat];
         newChat.push(response.data.choices[0].message.content);
         setChat(newChat);
@@ -38,6 +44,15 @@ const Chatbot =  () => {
         const newLogInput = [...logInput];
         newLogInput.push(userInput);
         setLogInput(newLogInput);
+
+        
+        setInput({
+            user_input: ""
+        })
+        } catch(error){
+            console.log(error);
+        }
+
     }
   
     // console.log(chat)
@@ -58,9 +73,8 @@ const Chatbot =  () => {
         event.preventDefault();
         
         fetchData(input.user_input, apiKey)
-        event.target.value = "" 
+        
     }
-    
     
     let delay = 50;
         
@@ -136,7 +150,7 @@ const Chatbot =  () => {
                     <textarea 
                         className='custom-textarea'
                         type="text"
-                        placeholder={input.user_input}
+                        value={input.user_input}
                         name="user_input"
                        
                         onChange={handleChange}

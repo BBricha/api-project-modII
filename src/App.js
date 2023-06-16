@@ -24,7 +24,7 @@ function App() {
     <Routes>
       <Route path="/chatbot" element={<Chatbot />} />
       <Route path="/photogenerate" element={<PhotoGenerate />} />
-   <Route path="/contentgenerate" element={<ContentGenerate /> } />
+      <Route path="/contentgenerate" element={<ContentGenerate /> } />
       <Route path="/codedebugg" element={<CodeDebugg />} />
       
        
