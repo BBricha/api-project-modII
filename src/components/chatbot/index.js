@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Configuration, OpenAIApi } from "openai";
 import "./index.css"
-import LoadingDots from '../form/Form';
+// import LoadingDots from '../form/Form';
 
 // import TextField from '@mui/material/TextField';
 // require('dotenv').config();
@@ -19,14 +19,14 @@ const Chatbot =  () => {
     const [displayText, setDisplayText] = useState('');
 
     const apiKey = process.env.REACT_APP_API_KEY;
-    console.log(apiKey);
+    // console.log(apiKey);
     const fetchData = async (userInput, apiK) => {    
-        console.log(apiK)
+        // console.log(apiK)
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
             apiKey: apiK,
         });
-        console.log("making query");
+        // console.log("making query");
         delete configuration.baseOptions.headers['User-Agent'];
         const openai = new OpenAIApi(configuration);
         try { let response = await openai.createChatCompletion({
@@ -51,6 +51,9 @@ const Chatbot =  () => {
         })
         } catch(error){
             console.log(error);
+            const newChat = [...chat];
+            newChat.push('Invalid API key: please verify your API');
+            setChat(newChat);
         }
 
     }
@@ -76,36 +79,66 @@ const Chatbot =  () => {
         
     }
     
+    
+    
+    // let chatMinLastItem = chat.length > 1 ? chat.pop() : [];
+    // console.log(interval);
+    // if there is a chat all the chat exept the last one 
+    
+    
     let delay = 50;
-        
     useEffect(() => {
         const lastMessage = chat[chat.length - 1];
         if (lastMessage) {
             let timer = setTimeout(() => {
                 const nextCharIndex = displayText.length + 1;
-                setDisplayText(lastMessage.substring(0, nextCharIndex));
+                    setDisplayText(lastMessage.substring(0, nextCharIndex));
             }, delay);
-    
+            
             return () => {
                 clearTimeout(timer);
             };
         }
     }, [displayText, chat]);
-    
 
-    // console.log(interval);
-    let chatJSX = chat.map((message, index) => {
-        return (<div>
-            <div className='user_img_text'>
-                <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
-                <p> {logInput[index]}</p>
-            </div>
-            <div className='assistance_img_text'>
-                <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
-                <p>{displayText}</p>
-            </div>
-        </div>)
-    })
+    const updatedChat = [...chat]
+     updatedChat.pop()
+    console.log(updatedChat);
+
+    let checkMoreThanOne = true;
+  
+    if (chat.length > 1){
+        checkMoreThanOne = true;
+    }else if (chat.length === 1) {
+        checkMoreThanOne = false;
+    };
+        
+        const chatJPX = checkMoreThanOne ? updatedChat.map((message, index) => {
+
+            return (<div>
+                <div className='user_img_text'>
+                    <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
+                    <p> {logInput[index]}</p>
+                </div>
+                <div className='assistance_img_text'>
+                    <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
+                    <p>{message} {displayText}</p>
+                </div>
+            </div>)
+        }) : chat.map((message, index) => {
+            return (<div>
+                <div className='user_img_text'>
+                    <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
+                    <p> {logInput[index]}</p>
+                </div>
+                <div className='assistance_img_text'>
+                    <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
+                    <p>{displayText}</p>
+                </div>
+            </div>)
+        }) 
+ 
+   
 
     // const dots = ()=> {if (chat.length < logInput.length){
     //     return <LoadingDots />
@@ -141,7 +174,7 @@ const Chatbot =  () => {
         <div className='chat_container'>
             <div className='response_input_container'>
             
-                {chat.length > 0 ? chatJSX:textChat }
+                {chat.length > 0 ? chatJPX :textChat }
             </div>
             <div >
             
@@ -174,4 +207,4 @@ const Chatbot =  () => {
     )
 }
 
-export default Chatbot
+export default Chatbot;

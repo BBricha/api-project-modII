@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Chatbot from './components/chatbot';
 import CodeDebugg from './components/code_debugging';
@@ -26,7 +26,7 @@ function App() {
       <Route path="/photogenerate" element={<PhotoGenerate />} />
       <Route path="/contentgenerate" element={<ContentGenerate /> } />
       <Route path="/codedebugg" element={<CodeDebugg />} />
-      
+      <Route path="/*" element={<Navigate to="/chatbot" />} />
        
     </Routes>
     
