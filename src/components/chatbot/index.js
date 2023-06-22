@@ -151,8 +151,8 @@ const Chatbot =  () => {
 
 
     let textChat = <h4><h2>CHATGPT</h2>in particular, is fine-tuned to excel in generating responses to conversational prompts. It can be used for various applications such as chatbots, virtual assistants, customer support systems, and more. The model is capable of understanding context, generating coherent and contextually relevant responses, and engaging in back-and-forth conversations.
-            -May occasionally generate incorrect information. <br/>-May occasionally produce harmful instructions or biased content. <br/>-Limited knowledge of world and events after 2021.
-        <br /> So let's ask it to do tasks for us. </h4>
+            <br/>-May occasionally generate incorrect information. <br/>-May occasionally produce harmful instructions or biased content. <br/>-Limited knowledge of world and events after 2021.
+        <br /> So let's ask it to do tasks for us... </h4>
 
 
     return (
