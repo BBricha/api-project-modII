@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Configuration, OpenAIApi } from "openai";
 import "./index.css"
-// import LoadingDots from '../form/Form';
 
-// import TextField from '@mui/material/TextField';
-// require('dotenv').config();
- 
 const Chatbot =  () => {
+    // const items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
     const [chat, setChat] = useState([]);
     
@@ -17,6 +14,8 @@ const Chatbot =  () => {
     const [logInput, setLogInput] = useState([])
 
     const [displayText, setDisplayText] = useState('');
+
+    // const [updatedChat, setUpdatedChat] = useState([])
 
     const apiKey = process.env.REACT_APP_API_KEY;
     // console.log(apiKey);
@@ -31,7 +30,7 @@ const Chatbot =  () => {
         const openai = new OpenAIApi(configuration);
         try { let response = await openai.createChatCompletion({
                 model: "gpt-3.5-turbo",
-                max_tokens: 50,
+                max_tokens: 200,
                 messages: [{role: "user", content: `${userInput}`}],
                         
             });
@@ -58,13 +57,7 @@ const Chatbot =  () => {
 
     }
   
-    // console.log(chat)
-    // console.log(input)
-
-    // useEffect( () => {
-    //     fetchData()
-        
-    // },[])
+    
     
     const handleChange = (event) => {
 
@@ -80,11 +73,7 @@ const Chatbot =  () => {
     }
     
     
-    
-    // let chatMinLastItem = chat.length > 1 ? chat.pop() : [];
-    // console.log(interval);
-    // if there is a chat all the chat exept the last one 
-    
+  
     
     let delay = 50;
     useEffect(() => {
@@ -101,72 +90,68 @@ const Chatbot =  () => {
         }
     }, [displayText, chat]);
 
-    const updatedChat = [...chat]
-     updatedChat.pop()
-    console.log(updatedChat);
+    
+
 
     let checkMoreThanOne = true;
-  
+    let updatedChat = []
     if (chat.length > 1){
         checkMoreThanOne = true;
+        updatedChat = [...chat]
+        updatedChat.pop()
+        
+        console.log(updatedChat) ;
     }else if (chat.length === 1) {
         checkMoreThanOne = false;
     };
         
-        const chatJPX = checkMoreThanOne ? updatedChat.map((message, index) => {
+        const chatJSX = checkMoreThanOne ? updatedChat.map((message, index) => {
 
-            return (<div>
-                <div className='user_img_text'>
-                    <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
-                    <p> {logInput[index]}</p>
-                </div>
-                <div className='assistance_img_text'>
-                    <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
-                    <p>{message} {displayText}</p>
-                </div>
-            </div>)
-        }) : chat.map((message, index) => {
-            return (<div>
-                <div className='user_img_text'>
-                    <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
-                    <p> {logInput[index]}</p>
-                </div>
-                <div className='assistance_img_text'>
-                    <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
-                    <p>{displayText}</p>
-                </div>
+                    // console.log(message);
+                return (<div>
+                    <div className='user_img_text'>
+                        <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
+                        <p> {logInput[index]}</p>
+                    </div>
+                    <div className='assistance_img_text'>
+                        <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
+                        <p>{message}</p>
+                    </div>
+                    <div className='user_img_text'>
+                        <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
+                        <p> {logInput[index + 1]}</p>
+                    </div>
+                    
+                </div>)
+            }) : chat.map((message, index) => {
+            // console.log(checkMoreThanOne);
+                return (<div>
+                    <div className='user_img_text'>
+                        <img className='user_img' src='https://previews.123rf.com/images/tuktukdesign/tuktukdesign1608/tuktukdesign160800037/61010821-user-icon-man-profile-businessman-avatar-person-glyph-vector-illustration.jpg' />
+                        <p> {logInput[index]}</p>
+                    </div>
+                    <div className='assistance_img_text'>
+                        <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
+                        <p>{displayText}</p>
+                    </div>
             </div>)
         }) 
- 
+
+
+        let lastChatJSX ;
+        if (checkMoreThanOne){
+            lastChatJSX =  <div className='assistance_img_text'>
+                <img className='user_img' src='https://static.vecteezy.com/system/resources/previews/011/894/733/original/artificial-intelligence-ai-robot-chat-bot-logo-template-free-vector.jpg' />
+                <p>{displayText}</p>
+            </div>
+        }
    
 
-    // const dots = ()=> {if (chat.length < logInput.length){
-    //     return <LoadingDots />
-    // }};
-
-    
-    // const text = `in particular, is fine-tuned to excel in generating responses to conversational prompts. It can be used for various applications such as chatbots, virtual assistants, customer support systems, and more. The model is capable of understanding context, generating coherent and contextually relevant responses, and engaging in back-and-forth conversations. So let's ask it to do tasks for us.`
-    
-    // useEffect(() => {
-    //     let timer;
-    //       const nextCharIndex = displayText.length + 1;
-      
-    //       timer = setTimeout(() => {
-    //         setDisplayText(prevDisplayText => text.substring(0, nextCharIndex));
-    //       }, delay);
-        
-      
-    //     return () => {
-    //       clearTimeout(timer);
-    //     };
-    //   }, [displayText]);
-    
-    
-    // let textChat = <h4><h2>CHATGPT</h2>{displayText}</h4>
+   
 
 
-
-    let textChat = <h4><h2>CHATGPT</h2>in particular, is fine-tuned to excel in generating responses to conversational prompts. It can be used for various applications such as chatbots, virtual assistants, customer support systems, and more. The model is capable of understanding context, generating coherent and contextually relevant responses, and engaging in back-and-forth conversations. 
+    let textChat = <h4><h2>CHATGPT</h2>in particular, is fine-tuned to excel in generating responses to conversational prompts. It can be used for various applications such as chatbots, virtual assistants, customer support systems, and more. The model is capable of understanding context, generating coherent and contextually relevant responses, and engaging in back-and-forth conversations.
+            -May occasionally generate incorrect information. <br/>-May occasionally produce harmful instructions or biased content. <br/>-Limited knowledge of world and events after 2021.
         <br /> So let's ask it to do tasks for us. </h4>
 
 
@@ -174,7 +159,8 @@ const Chatbot =  () => {
         <div className='chat_container'>
             <div className='response_input_container'>
             
-                {chat.length > 0 ? chatJPX :textChat }
+                {chat.length > 0 ? chatJSX :textChat }
+                {chat.length > 0 ? lastChatJSX : <></>}
             </div>
             <div >
             

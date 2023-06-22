@@ -59,8 +59,8 @@ const PhotoGenerate = () => {
 
     let imgJsx = img.map((message) => {
         return <div>
-            <img src={message}/>
-            <a href={message} download target="_blank">
+            <img src={message} alt='assistance reply'/>
+            <a href={message} download target="_blank" rel='noreferrer'>
                 <button>Download Image</button>
             </a>
 
