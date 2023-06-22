@@ -10,27 +10,31 @@ const PhotoGenerate = () => {
 
     const [displayText, setDisplayText] = useState('');
 
+    const [error, setError] = useState([]);
 
     const apiKey = process.env.REACT_APP_API_KEY;
     const fetchData = async (userInput, apik) => {
-        console.log(process.env);
-        console.log(apik)      
+        // console.log(process.env);
+        // console.log(apik)      
         const configuration = new Configuration({
             organization: "org-HE64b63VFlL3RscL2hfzqOrm",
             apiKey: apik,
         });
         delete configuration.baseOptions.headers['User-Agent'];
         const openai = new OpenAIApi(configuration);
-   const response = await openai.createImage({
-            prompt: `${userInput}`,
-            n: 1,
-            size: "256x256",
-          });
-        const newimg = [...img];
-        newimg.push(response.data.data[0].url)
-        console.log(response.data.data[0].url)
-        setImg(newimg);
-
+        try{const response = await openai.createImage({
+                prompt: `${userInput}`,
+                n: 1,
+                size: "256x256",
+            });
+            const newimg = [...img];
+            newimg.push(response.data.data[0].url)
+            // console.log(response.data.data[0].url)
+            setImg(newimg);
+        }catch(error){
+            console.log(error);
+            setError(["Invalid API Key"])
+        }
     }
   
     // console.log(img)
@@ -102,7 +106,7 @@ const PhotoGenerate = () => {
                
                 */}
                
-               {img.length > 0 ? imgJsx:textChat }
+               {error.length > 0 ? <div> {error[0]} </div> : img.length > 0 ? imgJsx:textChat }
             </div>
             <form className='input_container_img' onSubmit={handleSubmit}>
  
