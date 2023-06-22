@@ -10,7 +10,7 @@ The website is hosted on Render.com. You can access it using the following URL:
 
 [https://chatbot-img-generate.onrender.com/chatbot](https://chatbot-img-generate.onrender.com/chatbot)
 
-Please be aware that the website may take some time to load due to its current development stage. If you encounter any issues or have suggestions, feel free to reach out.
+Note that due to the free version of hosting being used, the website may load slowly.
 
 ## Screenshots
 
