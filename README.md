@@ -13,22 +13,25 @@ The website is hosted on Render.com. You can access it using the following URL:
 Note that due to the free version of hosting being used, the website may load slowly.
 
 ## Screenshots
-
-![Screenshot 1](./assets/chatbot.png)
-![Screenshot 1](./assets/TonyChatbot.png)
-![Screenshot 1](./assets/imgGenarator.png)
-![Screenshot 1](./assets/imgDemo.png)
-
+<p>
+<img src="./assets/chatbot.png" alt="Screenshot 1" width="400">
+<img src="./assets/TonyChatbot.png" alt="Screenshot 2" width="400">
+<img src="./assets/imgGenarator.png" alt="Screenshot 3" width="400">
+<img src="./assets/imgDemo.png" alt="Screenshot 4" width="400">
+</p>
 
 The above screenshots showcase the chatbot and image generator functionalities.
 
-## API Key
+## Technologies Used
 
-The website relies on the OpenAI API to power its chatbot and image generation features. An API key is required to access the OpenAI API. If the provided API key is not working, please contact me to update it.
+- React
+- OpenAI API
+- HTML
+- CSS
+- JavaScript
 
-## Development
+## Installation
 
-To contribute to the development of this website, follow these steps:
 
  Clone the repository:
     https://github.com/BBricha/api-project-modII
