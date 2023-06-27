@@ -13,11 +13,12 @@ The website is hosted on Render.com. You can access it using the following URL:
 Note that due to the free version of hosting being used, the website may load slowly.
 
 ## Screenshots
-
-<img src="./assets/chatbot.png" alt="Screenshot 1" width="400">
-<img src="./assets/TonyChatbot.png" alt="Screenshot 2" width="400">
-<img src="./assets/imgGenarator.png" alt="Screenshot 3" width="400">
+<div><img src="./assets/chatbot.png" alt="Screenshot 1" width="400">
+<img src="./assets/TonyChatbot.png" alt="Screenshot 2" width="400"></div>
+<div><img src="./assets/imgGenarator.png" alt="Screenshot 3" width="400">
 <img src="./assets/imgDemo.png" alt="Screenshot 4" width="400">
+
+</div>
 
 
 The above screenshots showcase the chatbot and image generator functionalities.
